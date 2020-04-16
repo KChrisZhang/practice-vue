@@ -27,3 +27,10 @@ yarn run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Log
+
+- 1587003725330
+  - 项目初始化
+  - 新增 NumberKeyboard 组件
+

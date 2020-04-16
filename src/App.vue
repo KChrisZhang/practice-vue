@@ -1,18 +1,31 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h3>{{ val }}</h3>
+    <NumberKeyboard :show="true" @onInput="onInput" @onDelete="onDelete" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NumberKeyboard from './components/NumberKeyboard'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    NumberKeyboard,
+  },
+  data() {
+    return {
+      val: '',
+    }
+  },
+  methods: {
+    onInput(val) {
+      this.val = val
+    },
+    onDelete(val) {
+      this.val = val
+    },
+  },
 }
 </script>
 
@@ -21,8 +34,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
