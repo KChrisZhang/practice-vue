@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <h3>{{ val }}</h3>
+
+    <router-view />
     <NumberKeyboard :show="true" @onInput="onInput" @onDelete="onDelete" />
   </div>
 </template>
