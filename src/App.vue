@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <h3>{{ val }}</h3>
+    <!-- <h3>{{ val }}</h3> -->
 
     <router-view />
-    <NumberKeyboard :show="true" @onInput="onInput" @onDelete="onDelete" />
+    <!-- <NumberKeyboard :show="true" @onInput="onInput" @onDelete="onDelete" /> -->
   </div>
 </template>
 
 <script>
-import NumberKeyboard from './components/NumberKeyboard'
+// import NumberKeyboard from './components/NumberKeyboard'
 
 export default {
   name: 'App',
   components: {
-    NumberKeyboard,
+    // NumberKeyboard,
   },
   data() {
     return {
