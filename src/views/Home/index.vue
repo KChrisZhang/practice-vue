@@ -5,34 +5,82 @@
     <!-- <div class="selector">
       <country-select
         v-model="country"
-        topCountry="US"
         :country="country"
         :className="'country'"
-        :whiteList="whiteList"
-        :shortCodeDropdown="true"
+        :placeholder="'请选择国籍'"
+        :whiteList="whiteListCode"
       />
     </div> -->
 
+    <Picker
+      :title="'标题'"
+      show-toolbar
+      :columns="columns"
+      @confirm="onConfirm"
+      @cancel="onCancel"
+      @change="onChange"
+    />
+
     <!-- <div class="selector">
       <region-select v-model="region" :country="country" :region="region" />
-    </div> -->
+    </div>-->
 
     <!-- <hello-world /> -->
   </div>
 </template>
 
 <script>
+import { Toast, Picker } from 'vant'
+import countries from '../../lang/zh-HK'
+
 export default {
   name: 'Home',
-  components: {},
+  components: { Picker },
   data() {
     return {
+      countries,
       country: '',
       region: '',
-      whiteList: ['US', 'CA', 'MX'],
+      whiteListCode: ['US', 'CA', 'MX'],
       result: null,
+      // columns: ['杭州', '宁波', '温州', '嘉兴', '湖州'],
     }
   },
+  methods: {
+    onConfirm(value, index) {
+      Toast(`当前值：${value}, 当前索引：${index}`)
+    },
+    onChange(picker, value, index) {
+      Toast(`当前值：${value}, 当前索引：${index}`)
+    },
+    onCancel() {
+      Toast('取消')
+    },
+  },
+  computed: {
+    whiteList() {
+      const arr = this.whiteListCode.map(item => this.$t(item))
+      console.log(arr)
+      return arr
+    },
+    columns() {
+      return Object.keys(this.countries).map(key => this.countries[key])
+    },
+    // countryName: {
+    //   get() {
+    //     return this.$t(this.country)
+    //   },
+    //   set(val) {
+    //     console.log(val, 'set')
+    //     this.country = val
+    //   },
+    // },
+  },
+  // watch: {
+  //   country(val) {
+  //     console.log(val, 'watch')
+  //   },
+  // },
 }
 </script>
 
