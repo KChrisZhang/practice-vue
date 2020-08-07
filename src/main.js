@@ -3,6 +3,9 @@ import router from './router'
 import App from './App.vue'
 import i18n from './lang'
 
+import imgLazy from './directive/imgLazy'
+Vue.directive('imgLazy', imgLazy)
+
 import 'vant/lib/index.css'
 import { Locale } from 'vant'
 import zhHK from 'vant/lib/locale/lang/zh-HK'
