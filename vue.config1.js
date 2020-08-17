@@ -11,7 +11,7 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: '',
+        target: '', // 代理地址为空时，编译会报错
         changeOrigion: true, // 允许跨域
         ws: true,
         pathRewrite: {
