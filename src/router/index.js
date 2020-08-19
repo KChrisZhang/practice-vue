@@ -24,5 +24,10 @@ export default new Router({
       name: 'closet',
       component: () => import('../views/Closet'),
     },
+    {
+      path: '/charts',
+      name: 'ChartIndex',
+      component: () => import('../views/Charts'),
+    },
   ],
 })
