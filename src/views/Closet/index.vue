@@ -3,6 +3,9 @@
 </template>
 
 <script>
+import myModule from './modules_mock';
+console.log(myModule);
+
 export default {
   name: 'ClosetIndex',
   methods: {
@@ -43,12 +46,40 @@ export default {
           console.log('timer2', i);
         }, 1000);
       }
+    },
+    applyPush() {
+      const arr = ['a', 'b'];
+      const add = ['1', '2', '3'];
+      arr.push.apply(arr, add);
+      console.log('applyPush', arr);
+    },
+    applyFunc() {
+      const apple = {
+        color: 'red',
+        say(name = 'Apple') {
+          console.log(`${name}'s color is ${this.color}.`);
+        }
+      };
+
+      const banana = {
+        color: 'yellow'
+      };
+
+      const orange = {
+        color: 'orange'
+      };
+
+      apple.say();
+      apple.say.apply(banana, ['Banana']); // 类数组参数
+      apple.say.call(orange, 'Orange'); // 参数列表,按顺寻排列
     }
   },
   mounted() {
-    this.timer();
-    this.timer1();
-    this.timer2();
+    // this.timer();
+    // this.timer1();
+    // this.timer2();
+    this.applyPush();
+    this.applyFunc();
   }
 };
 </script>
