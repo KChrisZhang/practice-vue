@@ -28,6 +28,24 @@ export default new Router({
       path: '/charts',
       name: 'ChartIndex',
       component: () => import('../views/Charts'),
+      redirect: { name: 'BarChart' },
+      children: [
+        {
+          path: 'line',
+          name: 'LineChart',
+          component: () => import('../views/Charts/LineChart.vue'),
+        },
+        {
+          path: 'bar',
+          name: 'BarChart',
+          component: () => import('../views/Charts/BarChart.vue'),
+        },
+        {
+          path: 'pie',
+          name: 'PieChart',
+          component: () => import('../views/Charts/PieChart.vue'),
+        },
+      ],
     },
   ],
 })

@@ -1,17 +1,12 @@
 <template>
   <div class="charts">
-    <BarChart />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import BarChart from './BarChart'
-
 export default {
   name: 'ChartsIndex',
-  components: {
-    BarChart,
-  },
   mounted() {
     console.log('[ChartsIndex] mounted')
   },
