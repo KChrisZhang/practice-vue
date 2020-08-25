@@ -1,10 +1,13 @@
 <template>
-  <div id="barChart" style="width: 50%; height: 400px;"></div>
+  <div
+    id="barChart"
+    style="width: 50%; height: 400px;"
+  ></div>
 </template>
 
 <script>
-import api from '@/api'
-import echarts from 'echarts'
+import api from '@/api';
+import echarts from 'echarts';
 
 /**
  * 按需引入
@@ -33,79 +36,79 @@ export default {
       timer: false,
       options: {
         title: {
-          text: 'Echarts 入门示例',
+          text: 'Echarts 入门示例'
         },
         tooltip: {},
         legend: {
-          data: ['销量'],
+          data: ['销量']
         },
         yAxis: {},
         xAxis: {
-          data: [], // 异步加载数据
+          data: [] // 异步加载数据
           // data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
         },
         series: [
           {
             name: '销量',
-            type: 'bar',
+            type: 'bar'
             // data: [5, 20, 36, 10, 10, 20],
             // yAxixIndex: 0,
           },
           {
             name: '产量',
             type: 'line',
-            data: [50, 100, 36, 100, 100, 20],
+            data: [50, 100, 36, 100, 100, 20]
             // yAxixIndex: 1,
-          },
-        ],
-      },
-    }
+          }
+        ]
+      }
+    };
   },
   mounted() {
-    console.log('[CommonBar] mounted')
+    console.log('[CommonBar] mounted');
 
-    this.init()
-    const self = this
+    this.init();
+    const self = this;
 
     window.onresize = function() {
-      if (self.timer) return
-      self.timer = true
+      if (self.timer) return;
+      self.timer = true;
 
       let singleTimer = setTimeout(function() {
-        self.chart.resize()
-        self.timer = false
+        self.chart.resize();
+        self.timer = false;
 
-        clearTimeout(singleTimer)
-        singleTimer = null
-      }, 200)
-    }
+        clearTimeout(singleTimer);
+        singleTimer = null;
+      }, 200);
+    };
   },
   methods: {
     async init() {
-      const myChart = echarts.init(document.getElementById('barChart'))
+      const myChart = echarts.init(document.getElementById('barChart'));
 
-      myChart.showLoading()
-      myChart.setOption(this.options)
-      const data = await api.getChartData()
+      myChart.showLoading();
+      myChart.setOption(this.options);
+      const data = await api.getChartData();
 
       myChart.setOption({
         xAxis: {
-          data: data.categories,
+          data: data.categories
         },
         series: [
           {
             // 根据名字对应到相应的系列
             name: '销量',
-            data: data.data,
-          },
-        ],
-      })
+            data: data.data
+          }
+        ]
+      });
 
-      myChart.hideLoading()
-      this.chart = myChart
-    },
-  },
-}
+      myChart.hideLoading();
+      this.chart = myChart;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
