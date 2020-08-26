@@ -40,7 +40,8 @@ export default {
         },
         tooltip: {},
         legend: {
-          data: ['销量']
+          data: ['销量'],
+          selectedMode: 'single'
         },
         yAxis: {},
         xAxis: {
@@ -106,6 +107,12 @@ export default {
 
       myChart.hideLoading();
       this.chart = myChart;
+
+      // myChart.on('legendselectchanged', function({ name, selected }) {
+      //   console.log(name, selected);
+
+      //   myChart.dispatchAction({ type: 'legendSelect', name });
+      // });
     }
   }
 };
