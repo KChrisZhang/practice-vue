@@ -50,11 +50,10 @@ export default {
 
       this.chart.clear();
       this.chart.setOption(options);
-      const mychart = this.chart;
 
+      const mychart = this.chart;
       this.chart.on('legendselectchanged', function({ name, selected }) {
         const result = Object.keys(selected).find(item => selected[item]);
-        console.log(result);
 
         if (typeof result === 'undefined') {
           mychart.dispatchAction({ type: 'legendSelect', name });

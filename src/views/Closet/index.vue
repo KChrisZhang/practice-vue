@@ -47,6 +47,7 @@ export default {
         }, 1000);
       }
     },
+
     applyPush() {
       const arr = ['a', 'b'];
       const add = ['1', '2', '3'];
@@ -61,25 +62,30 @@ export default {
         }
       };
 
-      const banana = {
-        color: 'yellow'
-      };
-
-      const orange = {
-        color: 'orange'
-      };
+      const banana = { color: 'yellow' };
+      const orange = { color: 'orange' };
 
       apple.say();
       apple.say.apply(banana, ['Banana']); // 类数组参数
       apple.say.call(orange, 'Orange'); // 参数列表,按顺寻排列
+    },
+
+    // timer 函数保有wait(...)作用域的闭包
+    wait(message) {
+      setTimeout(function timer() {
+        console.log(message);
+      }, 1000);
     }
   },
   mounted() {
     // this.timer();
     // this.timer1();
     // this.timer2();
-    this.applyPush();
-    this.applyFunc();
+
+    // this.applyPush();
+    // this.applyFunc();
+
+    this.wait('Hello, closure');
   }
 };
 </script>

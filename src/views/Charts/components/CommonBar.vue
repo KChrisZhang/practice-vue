@@ -38,30 +38,19 @@ export default {
         title: {
           text: 'Echarts 入门示例'
         },
-        tooltip: {},
+        tooltip: {
+          trigger: 'axis'
+        },
         legend: {
           data: ['销量'],
           selectedMode: 'single'
         },
         yAxis: {},
         xAxis: {
-          data: [] // 异步加载数据
-          // data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
+          data: []
+          // 异步加载数据
         },
-        series: [
-          {
-            name: '销量',
-            type: 'bar'
-            // data: [5, 20, 36, 10, 10, 20],
-            // yAxixIndex: 0,
-          },
-          {
-            name: '产量',
-            type: 'line',
-            data: [50, 100, 36, 100, 100, 20]
-            // yAxixIndex: 1,
-          }
-        ]
+        series: []
       }
     };
   },
@@ -93,14 +82,18 @@ export default {
       const data = await api.getChartData();
 
       myChart.setOption({
-        xAxis: {
-          data: data.categories
-        },
+        xAxis: { data: data.categories },
         series: [
           {
             // 根据名字对应到相应的系列
             name: '销量',
+            type: 'bar',
             data: data.data
+          },
+          {
+            name: '产量',
+            type: 'line',
+            data: [50, 100, 36, 100, 100, 20]
           }
         ]
       });
