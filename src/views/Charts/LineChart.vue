@@ -5,64 +5,80 @@
 </template>
 
 <script>
-import echarts from 'echarts';
+import api from '@/api'
+import echarts from 'echarts'
 
 export default {
   name: 'LineChart',
   data() {
     return {
       chart: null,
-      timer: false
-    };
-  },
-  mounted() {
-    console.log('[LineChart] mounted');
-    this.initChart();
-  },
-  methods: {
-    initChart() {
-      this.chart = echarts.init(document.getElementById('lineChart'));
-      const options = {
-        title: {
-          text: '折线图'
-        },
+      timer: false,
+      options: {
+        title: { text: '折线图' },
+        tooltip: { trigger: 'axis' },
         legend: {
-          selectedMode: 'multiple',
-          data: ['销量', '产量']
-        },
-        xAxis: {
-          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+          data: ['销量', '产量'],
+          // selectedMode: 'multiple',
         },
         yAxis: {},
+        xAxis: { data: [] },
+        series: [],
+      },
+    }
+  },
+  mounted() {
+    console.log('[LineChart] mounted')
+    this.initChart()
+  },
+  methods: {
+    async initChart() {
+      if (!this.chart) {
+        this.chart = echarts.init(document.getElementById('lineChart'))
+      }
+
+      const self = this
+      this.chart.clear()
+      this.chart.showLoading()
+      this.chart.setOption(this.options)
+
+      this.chart.on('legendselectchanged', function({ name, selected }) {
+        const result = Object.keys(selected).find(item => selected[item])
+
+        if (typeof result === 'undefined') {
+          self.chart.dispatchAction({ type: 'legendSelect', name })
+          return
+        }
+      })
+
+      const data1 = await api.getLineChartData()
+      const data2 = await api.getLineChartData()
+      console.log(data1, 'data1')
+      console.log(data2, 'data2')
+
+      const options = {
+        xAxis: {
+          data: data1.categories,
+        },
         series: [
           {
             type: 'line',
             name: '销量',
-            data: [50, 100, 36, 100, 100, 20]
+            data: data1.data,
           },
           {
             type: 'line',
             name: '产量',
-            data: [60, 130, 136, 200, 120, 80]
-          }
-        ]
-      };
+            data: data2.data,
+          },
+        ],
+      }
 
-      this.chart.clear();
-      this.chart.setOption(options);
-
-      const mychart = this.chart;
-      this.chart.on('legendselectchanged', function({ name, selected }) {
-        const result = Object.keys(selected).find(item => selected[item]);
-
-        if (typeof result === 'undefined') {
-          mychart.dispatchAction({ type: 'legendSelect', name });
-          return;
-        }
-      });
-    }
-  }
-};
+      this.chart.setOption(options)
+      this.chart.hideLoading()
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
