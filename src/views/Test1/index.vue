@@ -1,11 +1,14 @@
 <template>
-  <div class="test">
-    Test
-  </div>
+  <div class="test">Test</div>
 </template>
 
 <script>
 export default {
-  name: 'Test',
-}
+  name: 'Test'
+};
 </script>
+
+<style lang="scss">
+.test {
+}
+</style>

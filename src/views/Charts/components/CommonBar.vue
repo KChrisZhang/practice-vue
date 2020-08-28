@@ -1,13 +1,10 @@
 <template>
-  <div
-    id="barChart"
-    style="width: 50%; height: 400px;"
-  ></div>
+  <div id="barChart" style="width: 50%; height: 400px;"></div>
 </template>
 
 <script>
-import api from '@/api';
-import echarts from 'echarts';
+import api from '@/api'
+import echarts from 'echarts'
 
 /**
  * 按需引入
@@ -36,83 +33,88 @@ export default {
       timer: false,
       options: {
         title: {
-          text: 'Echarts 入门示例'
+          text: 'Echarts 入门示例',
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
         },
         legend: {
-          data: ['销量'],
-          selectedMode: 'single'
+          data: ['销量', '产量'],
+          // selectedMode: 'single',
         },
         yAxis: {},
         xAxis: {
-          data: []
+          data: [],
           // 异步加载数据
         },
-        series: []
-      }
-    };
+        series: [],
+      },
+    }
   },
   mounted() {
-    console.log('[CommonBar] mounted');
+    console.log('[CommonBar] mounted')
 
-    this.init();
-    const self = this;
+    this.init()
+    const self = this
 
     window.onresize = function() {
-      if (self.timer) return;
-      self.timer = true;
+      if (self.timer) return
+      self.timer = true
 
       let singleTimer = setTimeout(function() {
-        self.chart.resize();
-        self.timer = false;
+        self.chart.resize()
+        self.timer = false
 
-        clearTimeout(singleTimer);
-        singleTimer = null;
-      }, 200);
-    };
+        clearTimeout(singleTimer)
+        singleTimer = null
+      }, 200)
+    }
   },
   methods: {
     async init() {
-      const myChart = echarts.init(document.getElementById('barChart'));
+      const myChart = echarts.init(document.getElementById('barChart'))
 
-      myChart.showLoading();
-      myChart.setOption(this.options);
-      const data = await api.getChartData();
+      myChart.showLoading()
+      myChart.setOption(this.options)
+      const data1 = await api.getBarChartData()
+      const data2 = await api.getLineChartData()
+      console.log(data2)
 
       myChart.setOption({
-        xAxis: { data: data.categories },
+        xAxis: { data: data1.categories },
         series: [
           {
             // 根据名字对应到相应的系列
             name: '销量',
             type: 'bar',
-            data: data.data
+            data: data1.data,
           },
           {
             name: '产量',
             type: 'line',
-            data: [50, 100, 36, 100, 100, 20]
-          }
-        ]
-      });
+            data: data2.data,
+            // data: data2.data,
+          },
+        ],
+      })
 
-      myChart.hideLoading();
-      this.chart = myChart;
+      myChart.hideLoading()
+      this.chart = myChart
 
       // myChart.on('legendselectchanged', function({ name, selected }) {
       //   console.log(name, selected);
 
       //   myChart.dispatchAction({ type: 'legendSelect', name });
       // });
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
 #barChart {
+  width: 100%;
   margin: auto;
+  overflow: hidden;
 }
 </style>

@@ -1,11 +1,36 @@
+import Mock from 'mockjs'
+
 export default {
-  async getChartData() {
+  async getLineChartData() {
     return new Promise(resolve => {
       setTimeout(function() {
-        resolve({
-          categories: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
-          data: [5, 20, 36, 10, 10, 20],
-        })
+        resolve(
+          Mock.mock({
+            categories: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
+            'data|6': [
+              {
+                'value|100-900': 600,
+              },
+            ],
+          })
+        )
+      }, 1000)
+    })
+  },
+
+  getBarChartData() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(
+          Mock.mock({
+            categories: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
+            'data|6': [
+              {
+                'value|100-900': 600,
+              },
+            ],
+          })
+        )
       }, 1000)
     })
   },

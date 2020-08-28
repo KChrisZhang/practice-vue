@@ -1,6 +1,6 @@
 <template>
   <div class="bar-chart">
-    <Dataset />
+    <Dataset style="margin-bottom: 60px" />
     <CommonBar />
   </div>
 </template>
@@ -29,5 +29,6 @@ export default {
 .bar-chart {
   min-width: 800px;
   background-color: #fff;
+  padding-bottom: 100px;
 }
 </style>
