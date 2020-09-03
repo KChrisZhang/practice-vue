@@ -3,16 +3,22 @@
 </template>
 
 <script>
+import './self';
+// import './closure';
 import myModule from './modules_mock';
 console.log(myModule);
+
+/**
+ * 闭包：是由函数及声明该函数的词法环境组合而成的。
+ *       简单来说就是，定义在一个函数内部的函数
+ *       函数可以创建一个新的词法作用域
+ */
 
 export default {
   name: 'ClosetIndex',
   methods: {
     /**
-     * 词法作用域：执行完成for循环，此时 i=5
-     * 函数作用域：定时器执行函数，保留对全局i的引用
-     * 5 打印5次
+     * 5 打印5次（定时器回调函数执行之前已经完成了全部循环，此时执行回调函数时，变量i是5）
      */
     timer() {
       for (var i = 0; i < 5; i++) {
@@ -64,10 +70,12 @@ export default {
 
       const banana = { color: 'yellow' };
       const orange = { color: 'orange' };
+      const watermelon = { color: 'green' };
 
       apple.say();
       apple.say.apply(banana, ['Banana']); // 类数组参数
-      apple.say.call(orange, 'Orange'); // 参数列表,按顺寻排列
+      apple.say.call(orange, 'Orange'); // 参数列表,按顺序排列
+      apple.say.bind(watermelon)('Watermelon');
     },
 
     // timer 函数保有wait(...)作用域的闭包
@@ -81,11 +89,9 @@ export default {
     // this.timer();
     // this.timer1();
     // this.timer2();
-
     // this.applyPush();
     // this.applyFunc();
-
-    this.wait('Hello, closure');
+    // this.wait('Hello, closure');
   }
 };
 </script>
