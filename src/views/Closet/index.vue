@@ -5,8 +5,8 @@
 <script>
 import './self';
 // import './closure';
-import myModule from './modules_mock';
-console.log(myModule);
+// import myModule from './modules_mock';
+// console.log(myModule);
 
 /**
  * 闭包：是由函数及声明该函数的词法环境组合而成的。
