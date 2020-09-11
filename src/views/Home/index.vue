@@ -10,7 +10,7 @@
         :placeholder="'请选择国籍'"
         :whiteList="whiteListCode"
       />
-    </div> -->
+    </div>-->
 
     <Picker
       :title="'标题'"
@@ -30,8 +30,9 @@
 </template>
 
 <script>
-import { Toast, Picker } from 'vant'
-import countries from '../../lang/zh-HK'
+import './confirm';
+import countries from '../../lang/zh-HK';
+import { Toast, Picker } from 'vant';
 
 export default {
   name: 'Home',
@@ -42,30 +43,30 @@ export default {
       country: '',
       region: '',
       whiteListCode: ['US', 'CA', 'MX'],
-      result: null,
+      result: null
       // columns: ['杭州', '宁波', '温州', '嘉兴', '湖州'],
-    }
+    };
   },
   methods: {
     onConfirm(value, index) {
-      Toast(`当前值：${value}, 当前索引：${index}`)
+      Toast(`当前值：${value}, 当前索引：${index}`);
     },
     onChange(picker, value, index) {
-      Toast(`当前值：${value}, 当前索引：${index}`)
+      Toast(`当前值：${value}, 当前索引：${index}`);
     },
     onCancel() {
-      Toast('取消')
-    },
+      Toast('取消');
+    }
   },
   computed: {
     whiteList() {
-      const arr = this.whiteListCode.map(item => this.$t(item))
-      console.log(arr)
-      return arr
+      const arr = this.whiteListCode.map(item => this.$t(item));
+      console.log(arr);
+      return arr;
     },
     columns() {
-      return Object.keys(this.countries).map(key => this.countries[key])
-    },
+      return Object.keys(this.countries).map(key => this.countries[key]);
+    }
     // countryName: {
     //   get() {
     //     return this.$t(this.country)
@@ -75,13 +76,13 @@ export default {
     //     this.country = val
     //   },
     // },
-  },
+  }
   // watch: {
   //   country(val) {
   //     console.log(val, 'watch')
   //   },
   // },
-}
+};
 </script>
 
 <style lang="scss" scoped>
