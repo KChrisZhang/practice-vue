@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import './compare';
 import './confirm';
 import countries from '../../lang/zh-HK';
 import { Toast, Picker } from 'vant';
