@@ -89,9 +89,41 @@ console.log(bValue, 'bValue') // 3
 /**
  * 复合值,总是通过 引用复制 的方式来赋值/传递
  * 包括 对象和函数
+ * aArr 和 bArr 分别是指向 同一个复合值[1, 2, 3] 的两个不同引用
  */
 var aArr = [1, 2, 3]
 var bArr = aArr // bArr 是 [1, 2, 3] 的一个引用
 bArr.push(4)
 console.log(aArr, 'aArr') // [1, 2, 3, 4]
 console.log(bArr, 'bArr') // [1, 2, 3, 4]
+
+// 由于引用指向的是 值本身,而不是 变量, 所以一个引用无法更改另一个引用的指向
+// 一个引用不能更改另一个引用的指向, 只能更改共同指向的值
+var cArr = [1, 2, 3]
+var dArr = cArr
+console.log(cArr, 'cArr')
+console.log(dArr, 'dArr')
+
+dArr = [4, 5, 6]
+console.log(cArr, 'cArr')
+console.log(dArr, 'dArr')
+
+/**
+ * 向函数传递参数 cArr 时, 实际上是将 cArr 的一个副本赋值给 x
+ * cArr 仍然指向 [1, 2, 3]
+ * 在函数中, 通过引用 x 来更改数组的值, 变为 [1, 2, 3, 4]
+ * 但是 x = [4, 5, 6] 并不影响 cArr 的指向
+ * 所以 cArr 仍然指向 [1, 2, 3, 4]
+ * 我们不能通过引用 x 来更改引用 cArr 的指向, 只能更改 cArr 和 x 共同指向的值
+ */
+function foo2(x) {
+  x.push(4)
+  console.log(x, 'x1') // [1, 2, 3, 4]
+
+  x = [4, 5, 6]
+  x.push(7)
+  console.log(x, 'x2') // [4, 5, 6, 7]
+}
+
+foo2(cArr)
+console.log(cArr, 'foo2') // [1, 2, 3, 4]
