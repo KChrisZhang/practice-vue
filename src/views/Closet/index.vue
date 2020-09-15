@@ -3,11 +3,6 @@
 </template>
 
 <script>
-import './self';
-// import './closure';
-// import myModule from './modules_mock';
-// console.log(myModule);
-
 /**
  * 闭包：是由函数及声明该函数的词法环境组合而成的。
  *       简单来说就是，定义在一个函数内部的函数
