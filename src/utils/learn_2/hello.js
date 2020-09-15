@@ -75,3 +75,23 @@ function numbersCloseEnoughToEqual(n1, n2) {
 }
 console.log(numbersCloseEnoughToEqual(number1, number2), 'numbersCloseEnoughToEqual')
 console.log(Number.MAX_VALUE, 'MAX_VALUE')
+
+/**
+ * 简单值,总是通过 值复制 的方式来赋值/传递
+ * 包括 null, undefined, string, number, boolean, symbol
+ */
+var aValue = 2
+var bValue = aValue // bValue 是 aValue 的值的 一个副本
+bValue++
+console.log(aValue, 'aValue') // 2
+console.log(bValue, 'bValue') // 3
+
+/**
+ * 复合值,总是通过 引用复制 的方式来赋值/传递
+ * 包括 对象和函数
+ */
+var aArr = [1, 2, 3]
+var bArr = aArr // bArr 是 [1, 2, 3] 的一个引用
+bArr.push(4)
+console.log(aArr, 'aArr') // [1, 2, 3, 4]
+console.log(bArr, 'bArr') // [1, 2, 3, 4]
