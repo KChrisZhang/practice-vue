@@ -165,6 +165,9 @@ console.log('\n', '----------------------[demo9]')
  * 第一个字符是 ‘I’，以19为基数时，数值为18；
  * 第二个字符‘n’，不是一个有效的数字字符，解析到此位置，和‘42px’中的‘p’一样。
  */
+
+// 0 1 2 3 4 5 6 7 8 9
+// a b c d e f g h i
 console.log(parseInt(1 / 0, 19)) // 18
 
 var a9 = {
@@ -174,3 +177,41 @@ var a9 = {
   },
 }
 console.log(parseInt(a9))
+
+console.log('\n', '----------------------[demo10]')
+
+/**
+ * 显式强制类型转换为布尔值最常用的方法是 !!
+ * 因为第二个 ! 会将结果反转回原值
+ */
+var a10 = '0'
+var b10 = []
+var c10 = {}
+
+var d10 = ''
+var e10 = 0
+var f10 = null
+var g10
+
+console.log(!!a10, 'a10') // true
+console.log(!!b10, 'b10') // true
+console.log(!!c10, 'c10') // true
+
+console.log(!!d10, 'd10') // false
+console.log(!!e10, 'e10') // false
+console.log(!!f10, 'f10') // false
+console.log(!!g10, 'g10') // false
+
+console.log('\n', '----------------------[demo11]')
+
+var a11 = [1, function() {}, 2, function() {}]
+console.log(JSON.stringify(a11), 'a11') // [1,null,2,null]
+
+var result = JSON.stringify(a11, function(k, v) {
+  if (typeof v == 'function') {
+    return !!v
+  } else {
+    return v
+  }
+})
+console.log(result, 'result') // [1,true,2,true]
