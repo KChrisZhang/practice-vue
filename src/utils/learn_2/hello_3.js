@@ -120,4 +120,16 @@ console.log(a6 == b6) // false
 // toNumber(c6) = 0 => '42' == 0 => 42 == 0
 console.log(a6 == c6) // false
 
+if (a6) {
+  console.log('if a6', '这样的显式用法没问题')
+}
+
+if (!!a6) {
+  console.log('if !!a6', '这样的显式用法更好')
+}
+
+if (Boolean(a6)) {
+  console.log('if Boolean(a6)', '这样的显式用法也很好')
+}
+
 console.log('\n', '---------[demo7]')
