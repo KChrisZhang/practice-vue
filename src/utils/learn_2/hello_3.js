@@ -89,7 +89,7 @@ console.log(String(a4)) // Symbol(cool)
 console.log('\n', '---------[demo5]')
 
 /**
- * 字符串 和 数字 之间的相等比较：将字符串转换为数字，然后比较：
+ * 1.字符串 和 数字 之间的相等比较: 将字符串转换为数字，然后比较：
  * 1）如果 Type(x) 是数字，Type(y) 是字符串，则返回 x == ToNumber(y) 的结果
  * 2）如果 Type(x) 是字符串，Type(y) 是数字，则返回 ToNumber(x) == y 的结果
  */
@@ -103,7 +103,7 @@ console.log(a5 === b5) // false
 console.log('\n', '---------[demo6]')
 
 /**
- * 其他类型 和 布尔类型 之间的相等比较
+ * 2.其他类型 和 布尔类型 之间的相等比较: 将布尔值转换为数字，然后比较
  * 1）如果 Type(x) 是布尔类型，则返回 ToNumber(x) == y 的结果
  * 2）如果 Type(y) 是布尔类型，则返回 x == ToNumber(y) 的结果
  * ToNumber(true) = 1
@@ -133,3 +133,104 @@ if (Boolean(a6)) {
 }
 
 console.log('\n', '---------[demo7]')
+
+/**
+ * 3.null 和 undefined 之间的相等比较
+ * null 和 undefined 之间的 == 也设计隐式强制类型转换
+ * 也就是说，在 == 中，null 和 undefined 是一回事
+ */
+var a7 = null
+var b7
+
+console.log(a7 == b7) // true
+
+console.log(a7 == null) // true
+console.log(b7 == null) // true
+
+console.log(a7 == false) // false
+console.log(b7 == false) // false
+
+console.log(a7 == '') // false
+console.log(b7 == '') // false
+
+console.log(a7 == 0) // false
+console.log(b7 == 0) // false
+
+console.log('\n', '---------[demo8]')
+
+/**
+ * 4.对象和非对象之间的相等比较: 将对象转换为 ToPromitive(x)，然后比较
+ * 1）如果 Type(x) 是字符串或数字，Type(y) 是对象，则返回 x == ToPromitive(y) 的结果
+ * 1）如果 Type(x) 是对象，Type(y) 是字符串或数字，则返回 ToPromitive(x) == y 的结果
+ */
+
+var a9 = 42
+var b9 = [42]
+
+/**
+ * [42] 首先调用 ToPromitive 抽象操作，返回'42'；
+ * 然后变成 '42' == 42；
+ * 然后又变成 42 == 42；
+ * 最后二者相等
+ */
+console.log(a9 == b9) // true
+
+/**
+ * 之前介绍过的 ToPromitive 抽象操作的所有特性（如 toString()、valueOf()）在这里都适用
+ */
+
+console.log('\n', '---------[demo9]')
+
+// 1.返回其他数字
+Number.prototype.valueOf = function() {
+  return 3
+}
+
+console.log(new Number(2) == 3) // true
+
+var i9 = 2
+Number.prototype.valueOf = function() {
+  return i9++
+}
+
+var a9 = new Number(42)
+
+if (a9 == 2 && a9 == 3) {
+  console.log('Yep, this happened.')
+}
+
+// 2.假值的相等比较: 24
+
+// 7
+console.log(0 == null, 0) // false
+console.log(0 == undefined, 0) // false
+console.log(0 == NaN, 0) // false
+console.log(0 == [], 0) // true
+console.log(0 == {}, 0) // false
+console.log(0 == false, 0) // true
+console.log(0 == '0') // true
+
+// 5
+console.log(false == null, 'false') // false
+console.log(false == undefined, 'false') // false
+console.log(false == NaN, 'false') // false
+console.log(false == [], 'false') // true
+console.log(false == {}, 'false') // false
+
+// 7
+console.log('' == null) // false
+console.log('' == undefined) // false
+console.log('' == NaN) // false
+console.log('' == []) // true
+console.log('' == {}) // false
+console.log('' == false) // true
+console.log('' == 0) // true
+
+// 5
+console.log('0' == null, '0') // false
+console.log('0' == undefined, '0') // false
+console.log('0' == NaN, '0') // false
+console.log('0' == false, '0') // true
+console.log('0' == '', '0') // false
+
+// 3.极端情况
