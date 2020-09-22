@@ -192,7 +192,27 @@ switch (c5) {
 // default
 // 3
 
-// console.log('\n', '---------[demo6]')
+console.log('\n', '---------[demo6]')
+
+function addAll() {
+  var sum = 0
+  for (var i = 0; i < arguments.length; i++) {
+    sum += arguments[i]
+  }
+  return sum
+}
+
+console.log(addAll(2, 4, 6)) // 12
+
+// “RangeError: Maximum call stack size exceeded”。
+
+// var nums = []
+// for (var i = 1; i < 100000; i++) {
+//   nums.push(i)
+// }
+
+// console.log(addAll.call(null, nums))
+
 // console.log('\n', '---------[demo7]')
 // console.log('\n', '---------[demo8]')
 // console.log('\n', '---------[demo9]')
