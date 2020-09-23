@@ -213,7 +213,38 @@ console.log(addAll(2, 4, 6)) // 12
 
 // console.log(addAll.call(null, nums))
 
-// console.log('\n', '---------[demo7]')
+console.log('\n', '---------[demo7]')
+
+/**
+ * 完整运行
+ * 由于 JavaScript的单线程特性，
+ * 一旦 foo() 开始运行，它的所有代码都会在 bar() 中的任意代码运行之前完成。
+ * 这称为 完整运行 特性
+ */
+
+var a7 = 1
+var b7 = 2
+
+function foo7() {
+  console.log('foo7')
+
+  a7++ // 2
+  b7 = b7 * a7 // 4
+  a7 = b7 + 3 // 7
+}
+function bar7() {
+  console.log('bar7')
+
+  b7-- // 3
+  a7 = 8 + b7 // 11
+  b7 = a7 * 2 // 22
+}
+
+foo7()
+bar7()
+
+console.log(a7, b7) // 11, 22
+
 // console.log('\n', '---------[demo8]')
 // console.log('\n', '---------[demo9]')
 // console.log('\n', '---------[demo10]')
