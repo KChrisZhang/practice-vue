@@ -91,3 +91,44 @@ function foo(a) {
 
 foo(2).then(value => console.log(value, "foo[resolve]"));
 foo(-3).catch(error => console.log(error, "foo[reject]"));
+
+console.log("===================[demo3]");
+
+const p3 = new Promise(function(resolve) {
+  resolve("B");
+});
+const p1 = new Promise(function(resolve) {
+  resolve(p3);
+});
+const p2 = new Promise(function(resolve) {
+  resolve("A");
+});
+p1.then(function(v) {
+  console.log(v);
+});
+p2.then(function(v) {
+  console.log(v);
+});
+
+// 用于超时的一个promise机制
+function timeoutPromise(delay) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve("Timeout");
+    }, delay);
+  });
+}
+
+const bar = function() {
+  console.log("bar");
+};
+
+//设置foo超时
+Promise.race(bar(), timeoutPromise(300)).then(
+  function() {
+    console.log("race 及时完成");
+  },
+  function() {
+    console.log("error 被拒绝");
+  }
+);
