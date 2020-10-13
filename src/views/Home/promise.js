@@ -155,3 +155,23 @@ delay(100)
   .then(function STEP5() {
     console.log("step 5 (after another 50ms");
   });
+
+console.log("===================[demo3]");
+
+const bar2 = new Promise(resolve => {
+  setTimeout(() => {
+    console.log("bar2");
+    resolve(3);
+  }, 3000);
+});
+
+const bar3 = new Promise(resolve => {
+  setTimeout(() => {
+    console.log("bar3");
+    resolve(2);
+  }, 2000);
+});
+
+Promise.all([bar2, bar3]).then(values => {
+  console.log("all msgs.", values); // all msgs. [ 1, 2 ]
+});
