@@ -1,3 +1,10 @@
+/**
+ * 冒泡排序：交换位置
+ * 时间复杂度：O（n^2)
+ * 1. 进行 length-1 轮
+ * 2. 每一轮，都会产生一个最大数排在后面
+ */
+
 function swap(arr, i, j) {
   let temp = arr[i];
   arr[i] = arr[j];
