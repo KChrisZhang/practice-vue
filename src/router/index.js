@@ -23,6 +23,11 @@ export default new Router({
       component: () => import("../views/Closet")
     },
     {
+      path: "/form",
+      name: "Form",
+      component: () => import("../views/Form/parent")
+    },
+    {
       path: "/charts",
       name: "ChartIndex",
       component: () => import("../views/Charts"),
