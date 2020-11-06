@@ -55,3 +55,72 @@ for (let i of Object.keys(obj1)) {
 // sss
 // 12
 // female
+
+function analyseNumber(str) {
+  let data = Number(str);
+  let arr = [];
+
+  for (let i = 2; i <= data; i++) {
+    while (data % i === 0) {
+      arr.push(i);
+      data = data / i;
+    }
+    console.log(i, "------" + data);
+  }
+
+  console.log("结果是", arr.join(" ") + " ");
+}
+
+analyseNumber(180);
+
+let b = "123";
+console.log(typeof +b === "number", "=======");
+
+function computedPos(str) {
+  let arr = str.split(";");
+  let x = 0;
+  let y = 0;
+
+  for (let item of arr) {
+    if (item && item.length > 1) {
+      let temp = item.split("");
+      let direction = temp.splice(0, 1)[0];
+      item = temp.join("");
+      let num = Number(item);
+
+      if (num == item) {
+        console.log("direction", direction);
+        switch (direction) {
+          case "A": // left
+            x -= num;
+            break;
+          case "S": // bottom
+            y -= num;
+            break;
+          case "W": // top
+            y += num;
+            break;
+          case "D": // right
+            x += num;
+            break;
+        }
+      }
+    }
+  }
+
+  console.log(`${x},${y}`);
+}
+computedPos("A10;S20;W10;D30;X;A1A;B10A11;;A10;");
+
+console.log("-----------", "demo1");
+var a6 = 10,
+  b6 = 20,
+  c6 = 30;
+console.log(++a6, a6); // 11, 11
+console.log(a6++, a6); // 11, 12
+let e6 = ++a6 + ++b6 + c6++; // 13 + 21 + 30 = 64
+console.log("结果是", e6++, e6);
+
+console.log("-----------", "demo1");
+console.log("5" + 3); // 8
+console.log("5" - 3); // 2

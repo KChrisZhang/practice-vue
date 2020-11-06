@@ -36,6 +36,7 @@ import { Toast, Picker } from 'vant';
 export default {
   name: 'Home',
   components: { Picker },
+
   data() {
     return {
       countries,
@@ -75,6 +76,9 @@ export default {
     //     this.country = val
     //   },
     // },
+  },
+  created() {
+    console.log(this.$wang, '[Home]wang');
   }
   // watch: {
   //   country(val) {

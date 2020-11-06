@@ -28,6 +28,11 @@ export default new Router({
       component: () => import("../views/Form/parent")
     },
     {
+      path: "/layout",
+      name: "layout",
+      component: () => import("../views/Layout")
+    },
+    {
       path: "/charts",
       name: "ChartIndex",
       component: () => import("../views/Charts"),
